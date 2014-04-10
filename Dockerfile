@@ -1,13 +1,14 @@
 FROM ubuntu:12.04
 MAINTAINER Michael Neale <mneale@cloudbees.com
 
-# First, let us install Jenkins - as per https://github.com/cloudbees/jenkins-docker
-RUN apt-get update
-RUN echo deb http://pkg.jenkins-ci.org/debian binary/ >> /etc/apt/sources.list
-RUN apt-get install -y wget
-RUN wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
-RUN apt-get update
-RUN apt-get install -y jenkins
+# First, let us install Jenkins - as per aespinosa/docker-jenkins
+RUN echo deb http://archive.ubuntu.com/ubuntu precise universe >> /etc/apt/sources.list
+RUN apt-get update && apt-get clean
+RUN apt-get install -q -y openjdk-7-jre-headless && apt-get clean
+ADD http://mirrors.jenkins-ci.org/war/1.558/jenkins.war /opt/jenkins.war
+RUN ln -sf /jenkins /root/.jenkins
+EXPOSE 8080
+VOLUME ["/jenkins"]
 
 # now we install docker in docker - thanks to https://github.com/jpetazzo/dind
 RUN echo deb http://archive.ubuntu.com/ubuntu precise universe > /etc/apt/sources.list.d/universe.list
