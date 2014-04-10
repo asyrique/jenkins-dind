@@ -21,4 +21,4 @@ VOLUME /var/lib/docker
 
 
 
-CMD wrapdocker && java -jar /opt/jenkins.war
+CMD wrapdocker & java -jar /opt/jenkins.war
