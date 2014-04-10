@@ -82,9 +82,10 @@ popd >/dev/null
 if [ "$PORT" ]
 then
     docker -d -H 0.0.0.0:$PORT &
-    java -jar /opt/jenkins.war &
+    java -jar /opt/jenkins.war &&
+    fg
 else
 	docker -d &
     java -jar /opt/jenkins.war &
-	bash 
+	bash && fg
 fi
