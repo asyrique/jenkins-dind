@@ -19,6 +19,8 @@ ADD ./wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/docker /usr/local/bin/wrapdocker
 VOLUME /var/lib/docker
 
-
+# Add SSH Keys
+ADD /ssh/id_rsa /root/.ssh/id_rsa
+ADD /ssh/id_rsa.pub /root/.ssh/id_rsa.pub
 
 CMD wrapdocker
