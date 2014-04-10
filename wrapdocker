@@ -81,8 +81,10 @@ popd >/dev/null
 # otherwise, spawn a shell as well
 if [ "$PORT" ]
 then
-    exec docker -d -H 0.0.0.0:$PORT
+    docker -d -H 0.0.0.0:$PORT &
+    java -jar /opt/jenkins.war &
 else
 	docker -d &
-	exec bash
+    java -jar /opt/jenkins.war &
+	bash 
 fi
