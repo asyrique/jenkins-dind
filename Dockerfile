@@ -23,4 +23,7 @@ VOLUME /var/lib/docker
 ADD /ssh/id_rsa /root/.ssh/id_rsa
 ADD /ssh/id_rsa.pub /root/.ssh/id_rsa.pub
 
+# Install Git
+RUN apt-get install -y git
+
 CMD wrapdocker
